@@ -26,7 +26,7 @@ Escolha exatamente uma opção de cada lista:
 - motivo: ${MOTIVOS.join('; ')}
 Glossário: RE = seguros residenciais, empresariais e patrimoniais; Capitalização = títulos de capitalização e sorteios; Previdência = planos de previdência e resgates; Aplicativo = falhas de app/site; Comercialização = venda, oferta ou contratação.
 Regras:
-- confianca: inteiro de 0 a 100, calibrado. Abaixo de 70 quando faltar informação ou houver duas leituras plausíveis.
+- confianca: inteiro de 0 a 95, calibrado. Nunca use 100: toda sugestão passa por revisão humana. Use 85 a 95 só quando produto, natureza e motivo estiverem explícitos no texto; abaixo de 70 quando faltar informação ou houver duas leituras plausíveis.
 - ambiguo: true se mais de uma categoria de produto, natureza ou motivo for plausível.
 - justificativa: até 3 frases curtas em português, citando os sinais do texto. Sem dados pessoais.
 - evidencias: de 1 a 3 trechos COPIADOS LITERALMENTE do texto (cada um com até 12 palavras) que sustentam a classificação.
@@ -62,7 +62,7 @@ export function redact(text) {
 export function validate(out, source) {
   if (!out || typeof out !== 'object') throw new Error('Resposta vazia');
   if (!PRODUTOS.includes(out.produto) || !NATUREZAS.includes(out.natureza) || !MOTIVOS.includes(out.motivo)) throw new Error('Categoria fora da lista');
-  const conf = Math.max(0, Math.min(100, Math.round(Number(out.confianca))));
+  const conf = Math.max(0, Math.min(95, Math.round(Number(out.confianca))));
   if (!Number.isFinite(conf)) throw new Error('Confiança inválida');
   const lower = source.toLowerCase();
   // Só aceita evidências que realmente existem no texto (evita trecho inventado).

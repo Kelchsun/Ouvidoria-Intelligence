@@ -19,8 +19,8 @@ test('aceita só categorias da lista e só evidências literais', () => {
   assert.throws(() => validate({ ...BOM, produto: 'Saúde' }, TEXTO));
 });
 
-test('limita a confiança entre 0 e 100', () => {
-  assert.equal(validate({ ...BOM, confianca: 140 }, TEXTO).conf, 100);
+test('limita a confiança entre 0 e 95 (nunca 100%)', () => {
+  assert.equal(validate({ ...BOM, confianca: 140 }, TEXTO).conf, 95);
   assert.equal(validate({ ...BOM, confianca: -5 }, TEXTO).conf, 0);
 });
 
