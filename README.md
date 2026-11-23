@@ -10,6 +10,7 @@ Usa **150 manifestações fictícias**. Nenhum dado é de clientes reais.
 | Tela (front-end) | HTML, CSS e JavaScript puro, gráficos em SVG | `index.html` |
 | Classificação com IA | Função serverless na Vercel que chama a API do Gemini (`gemini-3.5-flash-lite`) | `api/classify.js` |
 | Banco de dados | Supabase (Postgres), acessado só pelo servidor | `api/estado.js`, `supabase/01-ouvidoria.sql` |
+| Agentes de IA do portfólio | Função que roda 4 agentes com function calling do Gemini (página em portfolioaibuilder.vercel.app/agentes) | `api/agente.js`, `api/_agentes.js` |
 | Testes | `node --test` | `tests/` |
 
 - O Gemini só sugere. Confiança abaixo do limite (padrão 70%) ou caso ambíguo vai para a fila. Toda validação é humana.
